@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "mainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = ".NET to PTV VISSIM";
             this.Load += new System.EventHandler(this.mainWindow_Load);
             this.ResumeLayout(false);
