@@ -11,9 +11,9 @@ using NET_TO_VISSIM.UI;
 
 namespace NET_TO_VISSIM
 {
-    public partial class mainWindow : Form
+    public partial class MainWindow : Form
     {
-        public mainWindow()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -22,7 +22,7 @@ namespace NET_TO_VISSIM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void mainWindow_Load(object sender, EventArgs e)
+        private void MainWindow_Load(object sender, EventArgs e)
         {
             Meta.ShowLicenceInfo();
         }

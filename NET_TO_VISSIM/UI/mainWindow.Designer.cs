@@ -1,6 +1,6 @@
 ﻿namespace NET_TO_VISSIM
 {
-    partial class mainWindow
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = ".NET to PTV VISSIM";
-            this.Load += new System.EventHandler(this.mainWindow_Load);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
 
         }
