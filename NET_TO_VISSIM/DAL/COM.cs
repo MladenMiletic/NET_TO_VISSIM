@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace NET_TO_VISSIM.DAL
 {
+    /// <summary>
+    /// Static class containing methods used for COM communication
+    /// </summary>
     public static class COM
     {
         /// <summary>
@@ -43,6 +46,7 @@ namespace NET_TO_VISSIM.DAL
                 MessageBox.Show(ex.Message, "Error while loading Vissim network!");
             }
         }
+
         /// <summary>
         /// Attempts to load layout into VISSIM
         /// </summary>
