@@ -32,15 +32,31 @@ namespace NET_TO_VISSIM.DAL
         /// </summary>
         /// <param name="vissimInstance">Vissim object with COM established</param>
         /// <param name="netPath">Full path to the .inpx VISSIM file</param>
-        public static void LoadVissimNetwork(Vissim vissimInstance, string netPath)
+        public static void LoadVissimNetwork(Vissim vissimInstance, string inpxPath)
         {
             try
             {
-                vissimInstance.LoadNet(netPath);
+                vissimInstance.LoadNet(inpxPath);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error while loading Vissim network!");
+            }
+        }
+        /// <summary>
+        /// Attempts to load layout into VISSIM
+        /// </summary>
+        /// <param name="vissimInstance">Vissim object with COM established</param>
+        /// <param name="layxPath">Full path to the .layx VISSIM file</param>
+        public static void LoadVissimLayout(Vissim vissimInstance, string layxPath)
+        {
+            try
+            {
+                vissimInstance.LoadLayout(layxPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while loading Vissim layout!");
             }
         }
     }
