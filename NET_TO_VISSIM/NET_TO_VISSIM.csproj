@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Simulation.cs" />
+    <Compile Include="DAL\COM.cs" />
+    <Compile Include="DAL\VissimConnection.cs" />
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +82,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="VISSIMLIB">
+      <Guid>{A32047FC-3D4B-4743-8986-E0253FF393F4}</Guid>
+      <VersionMajor>10</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

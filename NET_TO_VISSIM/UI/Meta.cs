@@ -24,7 +24,7 @@ namespace NET_TO_VISSIM.UI
         /// </summary>
         public static void ShowLicenceInfo()
         {
-            MessageBox.Show(licenceInfo, "Licence information!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            MessageBox.Show(GetLicenceInfo(), "Licence information!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
         }
         /// <summary>
         /// Get method for licence info data
