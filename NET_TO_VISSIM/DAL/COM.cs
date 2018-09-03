@@ -13,6 +13,8 @@ namespace NET_TO_VISSIM.DAL
     /// </summary>
     public static class COM
     {
+        #region Vissim object
+
         /// <summary>
         /// Creates COM and opens VISSIM.exe
         /// </summary>
@@ -63,5 +65,31 @@ namespace NET_TO_VISSIM.DAL
                 MessageBox.Show(ex.Message, "Error while loading Vissim layout!");
             }
         }
+
+        #endregion
+
+        #region ISimulation
+
+        /// <summary>
+        /// Attempts to set simulation seed for the given simulation object
+        /// </summary>
+        /// <param name="simulation">Vissim.Simulation object</param>
+        /// <param name="seed">Integer value of seed</param>
+        /// <returns></returns>
+        public static bool SetSimulationSeed(ISimulation simulation, int seed)
+        {
+            try
+            {
+                simulation.set_AttValue("RandSeed", seed);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while loading Vissim layout!");
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

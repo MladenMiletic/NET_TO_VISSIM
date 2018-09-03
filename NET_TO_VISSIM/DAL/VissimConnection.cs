@@ -26,5 +26,11 @@ namespace NET_TO_VISSIM.DAL
         /// Default deconstructor which will close the Vissim instance
         /// </summary>
         ~VissimConnection() => VissimInstance.Exit();
+
+        /// <summary>
+        /// Get method for Vissim instance in the current Vissim Connection
+        /// </summary>
+        /// <returns>Vissim object with established COM</returns>
+        public Vissim GetVissimInstance() => VissimInstance;
     }
 }
