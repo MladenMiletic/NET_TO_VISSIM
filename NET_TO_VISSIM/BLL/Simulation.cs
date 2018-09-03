@@ -11,14 +11,22 @@ namespace NET_TO_VISSIM.BLL
     /// <summary>
     /// Class used to store current simulation data with methods used to manipulate the current simulation
     /// </summary>
-    public class Simulation
+    public class Simulation : IDisposable
     {
+        /// <summary>
+        /// Flag: Has Dispose already been called?
+        /// </summary>
+        bool disposed = false;
+
         /// <summary>
         /// Holds the reference to the simulation interface of VISSIM
         /// </summary>
         private ISimulation currentSimulation;
-        private int simulationSeed;
 
+        /// <summary>
+        /// Current simulation seed
+        /// </summary>
+        private int simulationSeed;
 
         /// <summary>
         /// Default constructor which gets the simulation object reference from VISSIM
@@ -36,6 +44,31 @@ namespace NET_TO_VISSIM.BLL
             {
                 simulationSeed = seed;
             }
+        }
+
+        /// <summary>
+        /// Public implementation of Dispose pattern callable by consumers.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Protected implementation of Dispose pattern.
+        /// </summary>
+        /// <param name="disposing">Bool for freeing other managed objects</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+            if (disposing)
+            {
+            }
+            disposed = true;
         }
     }
 }
