@@ -28,6 +28,8 @@ namespace NET_TO_VISSIM.BLL
         /// </summary>
         private int simulationSeed;
 
+        private int simulationPeriod;
+
         /// <summary>
         /// Default constructor which gets the simulation object reference from VISSIM
         /// </summary>
@@ -46,6 +48,18 @@ namespace NET_TO_VISSIM.BLL
             }
         }
 
+        /// <summary>
+        /// Sets simulation period in VISSIM and stores it locally if successful
+        /// </summary>
+        /// <param name="period"></param>
+        public void SetSimulationPeriod(int period)
+        {
+            if (COM.SetSimulationPeriod(currentSimulation, period))
+            {
+                simulationPeriod = period;
+            }
+        }
+        #region Dispose
         /// <summary>
         /// Public implementation of Dispose pattern callable by consumers.
         /// </summary>
@@ -70,5 +84,6 @@ namespace NET_TO_VISSIM.BLL
             }
             disposed = true;
         }
+        #endregion
     }
 }

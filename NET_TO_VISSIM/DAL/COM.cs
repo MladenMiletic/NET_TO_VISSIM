@@ -85,7 +85,27 @@ namespace NET_TO_VISSIM.DAL
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error while loading Vissim layout!");
+                MessageBox.Show(ex.Message, "Error while setting simulation seed!");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to set simulation period for the given simulation object
+        /// </summary>
+        /// <param name="simulation">Vissim.Simulation object</param>
+        /// <param name="period">Integer value of period</param>
+        /// <returns></returns>
+        public static bool SetSimulationPeriod(ISimulation simulation, int period)
+        {
+            try
+            {
+                simulation.set_AttValue("SimPeriod", period);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while setting simulation period!");
                 return false;
             }
         }
