@@ -28,7 +28,15 @@ namespace NET_TO_VISSIM.BLL
         /// </summary>
         private int simulationSeed;
 
+        /// <summary>
+        /// Current simulation period
+        /// </summary>
         private int simulationPeriod;
+
+        /// <summary>
+        /// Current simulation resolution
+        /// </summary>
+        private int simulationResolution;
 
         /// <summary>
         /// Default constructor which gets the simulation object reference from VISSIM
@@ -39,7 +47,7 @@ namespace NET_TO_VISSIM.BLL
         /// <summary>
         /// Sets simulation seed in VISSIM and stores it locally if successful
         /// </summary>
-        /// <param name="seed">Integer value of random seed</param>
+        /// <param name="seed">Integer value of random seed. Min: 1</param>
         public void SetSimulationSeed(int seed)
         {
             if(COM.SetSimulationSeed(currentSimulation, seed))
@@ -51,12 +59,24 @@ namespace NET_TO_VISSIM.BLL
         /// <summary>
         /// Sets simulation period in VISSIM and stores it locally if successful
         /// </summary>
-        /// <param name="period"></param>
+        /// <param name="period">Integer value of period. Min: 1</param>
         public void SetSimulationPeriod(int period)
         {
             if (COM.SetSimulationPeriod(currentSimulation, period))
             {
                 simulationPeriod = period;
+            }
+        }
+
+        /// <summary>
+        /// Sets simulation resolution in VISSIM and stores it locally if successful
+        /// </summary>
+        /// <param name="resolution">Integer value of resolution. Range: 1 - 20</param>
+        public void SetSimulationResolution(int resolution)
+        {
+            if (COM.SetSimulationResolution(currentSimulation, resolution))
+            {
+                simulationResolution = resolution;
             }
         }
 

@@ -110,6 +110,25 @@ namespace NET_TO_VISSIM.DAL
             }
         }
 
+        /// <summary>
+        /// Attempts to set simulation resolution for the given simulation object
+        /// </summary>
+        /// <param name="simulation">Vissim.Simulation object</param>
+        /// <param name="resolution">Integer value of resolution</param>
+        /// <returns></returns>
+        public static bool SetSimulationResolution(ISimulation simulation, int resolution)
+        {
+            try
+            {
+                simulation.set_AttValue("SimRes", resolution);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while setting simulation resolution!");
+                return false;
+            }
+        }
         #endregion
     }
 }
