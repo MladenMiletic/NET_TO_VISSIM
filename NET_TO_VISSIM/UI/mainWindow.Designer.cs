@@ -1,5 +1,8 @@
 ﻿namespace NET_TO_VISSIM
 {
+    /// <summary>
+    /// MainWindow class designer
+    /// </summary>
     partial class MainWindow
     {
         /// <summary>

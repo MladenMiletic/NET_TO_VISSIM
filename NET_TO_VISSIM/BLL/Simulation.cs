@@ -59,6 +59,7 @@ namespace NET_TO_VISSIM.BLL
                 simulationPeriod = period;
             }
         }
+
         #region Dispose
         /// <summary>
         /// Public implementation of Dispose pattern callable by consumers.

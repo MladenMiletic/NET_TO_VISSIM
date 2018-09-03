@@ -13,6 +13,9 @@ namespace NET_TO_VISSIM
 {
     public partial class MainWindow : Form
     {
+        /// <summary>
+        /// Main Window constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

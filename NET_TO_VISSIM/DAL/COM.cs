@@ -36,7 +36,7 @@ namespace NET_TO_VISSIM.DAL
         /// Attempts to load network into VISSIM
         /// </summary>
         /// <param name="vissimInstance">Vissim object with COM established</param>
-        /// <param name="netPath">Full path to the .inpx VISSIM file</param>
+        /// <param name="inpxPath">Full path to the .inpx VISSIM file</param>
         public static void LoadVissimNetwork(Vissim vissimInstance, string inpxPath)
         {
             try

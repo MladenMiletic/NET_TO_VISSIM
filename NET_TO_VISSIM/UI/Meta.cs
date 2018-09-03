@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace NET_TO_VISSIM.UI
 {
+    /// <summary>
+    /// Class containing all meta information
+    /// </summary>
     public static class Meta
     {
         private const string licenceInfo = "Copyright 2018 Mladen Miletić\n\n" +
