@@ -80,6 +80,14 @@ namespace NET_TO_VISSIM.BLL
             }
         }
 
+        /// <summary>
+        /// Performs one sigle simulation step, and checks possible algorithms and implemenations
+        /// </summary>
+        public void SimulationStep()
+        {
+            currentSimulation.RunSingleStep();
+        }
+
         #region Dispose
         /// <summary>
         /// Public implementation of Dispose pattern callable by consumers.

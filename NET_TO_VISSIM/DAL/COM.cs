@@ -75,7 +75,7 @@ namespace NET_TO_VISSIM.DAL
         /// </summary>
         /// <param name="simulation">Vissim.Simulation object</param>
         /// <param name="seed">Integer value of seed</param>
-        /// <returns></returns>
+        /// <returns>True if VISSIM accepted the value</returns>
         public static bool SetSimulationSeed(ISimulation simulation, int seed)
         {
             try
@@ -95,7 +95,7 @@ namespace NET_TO_VISSIM.DAL
         /// </summary>
         /// <param name="simulation">Vissim.Simulation object</param>
         /// <param name="period">Integer value of period</param>
-        /// <returns></returns>
+        /// <returns>True if VISSIM accepted the value</returns>
         public static bool SetSimulationPeriod(ISimulation simulation, int period)
         {
             try
@@ -115,7 +115,7 @@ namespace NET_TO_VISSIM.DAL
         /// </summary>
         /// <param name="simulation">Vissim.Simulation object</param>
         /// <param name="resolution">Integer value of resolution</param>
-        /// <returns></returns>
+        /// <returns>True if VISSIM accepted the value</returns>
         public static bool SetSimulationResolution(ISimulation simulation, int resolution)
         {
             try
