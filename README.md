@@ -7,28 +7,28 @@ Project is created as a tool used in the master thesis of Mladen Miletić, Facul
 
 Project goals:
 
-1. Enable COM communication with PTV VISSIM (v10) software:
+# 1. Enable COM communication with PTV VISSIM (v10) software:
   - Launch VISSIM from the application
   - Load a network to VISSIM
   - Manipulate basic simulation parameters
   - Run the simulation(s)
   
-2. Gather simulation data:
+# 2. Gather simulation data:
   - Access all available simulation data after simulation
   - Access all available simulation data during simulation
   - Access all data across multiple simulations
   - Store all gathered data in .csv format
   
-3. Implement signal control:
+# 3. Implement signal control:
   - Read signal data from each signal controller and group
   - Take control of signal controller to repeat existing signal program
   - Make permament and temporary changes to the signal program
   
-4. Implement artificial intelligence:
+# 4. Implement artificial intelligence:
   - Fuzzy Logic for signal control
   - Genetic algorithm for the optimisation of signal programs
   - Neural network for signal control
   
-5. Fluid user interface
+# 5. Fluid user interface
   - Use application while VISSIM simulation is running
   - Dynamcally change simulation parameters
