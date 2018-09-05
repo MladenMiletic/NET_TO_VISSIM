@@ -29,5 +29,13 @@ namespace NET_TO_VISSIM
         {
             Meta.ShowLicenceInfo();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (TestingForm tests = new TestingForm())
+            {
+                tests.ShowDialog();
+            }
+        }
     }
 }

@@ -86,7 +86,7 @@ namespace NET_TO_VISSIM.BLL
         public void SimulationStep()
         {
             currentSimulation.RunSingleStep();
-            AlgorithmCheck();
+            // AlgorithmCheck();
         }
 
         /// <summary>
