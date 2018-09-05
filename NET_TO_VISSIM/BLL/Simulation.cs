@@ -86,6 +86,35 @@ namespace NET_TO_VISSIM.BLL
         public void SimulationStep()
         {
             currentSimulation.RunSingleStep();
+            AlgorithmCheck();
+        }
+
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        private void AlgorithmCheck()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Simulation continously runs until the end or until a predefined break point is reached.
+        /// </summary>
+        public void RunContinuos()
+        {
+            currentSimulation.RunContinuous();
+        }
+
+        /// <summary>
+        /// Simulation continuosly runs until the set simulationBreakPoint
+        /// </summary>
+        /// <param name="simulationBreakPoint">Integer value of the simulation breaking point</param>
+        public void RunContinuos(int simulationBreakPoint)
+        {
+            if(COM.SetSimulationBreakPoint(currentSimulation, simulationBreakPoint))
+            {
+                RunContinuos();
+            }
         }
 
         #region Dispose

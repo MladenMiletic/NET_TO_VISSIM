@@ -111,6 +111,26 @@ namespace NET_TO_VISSIM.DAL
         }
 
         /// <summary>
+        /// Sets a breaking point used for continuos run
+        /// </summary>
+        /// <param name="simulation">Vissim.Simulation object</param>
+        /// <param name="simulationBreakPoint">Integer value of the breakpoint</param>
+        /// <returns>True if VISSIM accepted the value</returns>
+        public static bool SetSimulationBreakPoint(ISimulation simulation, int simulationBreakPoint)
+        {
+            try
+            {
+                simulation.set_AttValue("SimBreakAt", simulationBreakPoint);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while setting simulation break point!");
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Attempts to set simulation resolution for the given simulation object
         /// </summary>
         /// <param name="simulation">Vissim.Simulation object</param>
