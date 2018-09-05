@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VISSIMLIB;
+using System.Windows.Forms;
 
 namespace NET_TO_VISSIM.DAL
 {
@@ -49,8 +50,15 @@ namespace NET_TO_VISSIM.DAL
         {
             if(isVissimOpen)
             {
-                vissimInstance.Exit();
-                isVissimOpen = false;
+                try
+                {
+                    vissimInstance.Exit();
+                    isVissimOpen = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error while closing Vissim instance");
+                }
             }
         }
     }
