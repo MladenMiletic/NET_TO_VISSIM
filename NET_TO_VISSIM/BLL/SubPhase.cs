@@ -67,7 +67,7 @@ namespace NET_TO_VISSIM.BLL
                 }
                 currentDuration = currentDuration + (1/resolution);
             }
-            if (currentDuration == duration)
+            if (currentDuration >= duration)
             {
                 currentDuration = 0;
                 return true;
