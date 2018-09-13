@@ -94,6 +94,7 @@ namespace NET_TO_VISSIM.BLL
                 }
                 currentSubPhase = subPhases[currentSubPhaseIndex];
             }
+            currentDuration += 1 / resolution;
             return false;
         }
     }
