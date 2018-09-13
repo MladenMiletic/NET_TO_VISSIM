@@ -15,9 +15,8 @@ namespace NET_TO_VISSIM.BLL
         public float duration;
         public float currentDuration;
         public SubPhase currentSubPhase;
-        public VariableSubPhase variablePhase;
         public int currentSubPhaseIndex;
-        public int phaseCount;
+        public int subPhaseCount;
 
         /// <summary>
         /// Initializes phase, currentDuration is considered to be 0
@@ -36,9 +35,9 @@ namespace NET_TO_VISSIM.BLL
         {
             this.subPhases = subPhases;
             this.currentDuration = currentDuration;
-            phaseCount = subPhases.Count();
+            subPhaseCount = subPhases.Count();
             CalculateDuration();
-            SetInitialPhase();
+            SetInitialSubPhase();
         }
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace NET_TO_VISSIM.BLL
         /// <summary>
         /// Sets the initial subphase and current time point inside the subphase
         /// </summary>
-        private void SetInitialPhase()
+        private void SetInitialSubPhase()
         {
             float checkedPhasesDuration = 0;
             currentSubPhaseIndex = 0;
@@ -85,7 +84,7 @@ namespace NET_TO_VISSIM.BLL
             if(currentSubPhase.Step(resolution))
             {
                 currentSubPhaseIndex++;
-                if (currentSubPhaseIndex == phaseCount)
+                if (currentSubPhaseIndex == subPhaseCount)
                 {
                     currentSubPhaseIndex = 0;
                     currentDuration = 0;

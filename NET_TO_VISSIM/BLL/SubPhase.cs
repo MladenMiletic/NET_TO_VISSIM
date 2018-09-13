@@ -13,15 +13,20 @@ namespace NET_TO_VISSIM.BLL
     /// </summary>
     class SubPhase
     {
+        public float DefaultDuration { get => defaultDuration; set => defaultDuration = value; }
         public List<ISignalGroup> SignalGroups { get => signalGroups; set => signalGroups = value; }
         public List<int> SignalStates { get => signalStates; set => signalStates = value; }
         public float CurrentDuration { get => currentDuration; set => currentDuration = value; }
-        public float Duration { get => duration; set => duration = value; }
+        public float Duration { get => duration; private set => duration = value; }
+        public bool Editable { get => editable; set => editable = value; }
 
+        private bool editable;
         private List<ISignalGroup> signalGroups;
         private List<int> signalStates;
         private float duration;
         private float currentDuration;
+        private float defaultDuration;
+
 
         /// <summary>
         /// SubPhase constructor, initializes data
@@ -29,12 +34,15 @@ namespace NET_TO_VISSIM.BLL
         /// <param name="signalGroups">List of signal groups affected by this subphase</param>
         /// <param name="signalStates">List of states as defined by vissim coresponding numbers, must match the order of signal groups</param>
         /// <param name="duration">Duration of the subphase in seconds regardless of simulation resolution</param>
-        public SubPhase(List<ISignalGroup> signalGroups, List<int> signalStates, float duration)
+        /// <param name="editable">Set true if duration of this subphase can be changed</param>
+        public SubPhase(List<ISignalGroup> signalGroups, List<int> signalStates, float duration, bool editable)
         {
             this.signalGroups = signalGroups;
             this.signalStates = signalStates;
             this.duration = duration;
             this.currentDuration = 0;
+            this.defaultDuration = duration;
+            this.editable = editable;
         }
 
         /// <summary>
@@ -75,6 +83,22 @@ namespace NET_TO_VISSIM.BLL
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Resets the duration to the default one
+        /// </summary>
+        public void ResetDuration()
+        {
+            this.Duration = defaultDuration;
+        }
+
+        public void ChangeDuration(float newDuration)
+        {
+            if(editable)
+            {
+                this.duration = newDuration;
             }
         }
     }
