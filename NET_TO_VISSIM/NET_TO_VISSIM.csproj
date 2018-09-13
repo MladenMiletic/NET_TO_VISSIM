@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Phase.cs" />
     <Compile Include="BLL\Simulation.cs" />
     <Compile Include="BLL\SubPhase.cs" />
     <Compile Include="BLL\VariableSubPhase.cs" />
