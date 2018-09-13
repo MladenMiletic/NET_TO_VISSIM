@@ -55,7 +55,10 @@ namespace NET_TO_VISSIM.UI
 
         private void TestingForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            vissim.Close();
+            if(vissim != null)
+            {
+                vissim.Close();
+            }
         }
     }
 }

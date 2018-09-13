@@ -150,5 +150,29 @@ namespace NET_TO_VISSIM.DAL
             }
         }
         #endregion
+
+        #region SignalControl
+
+        /// <summary>
+        /// Attempts to set signal state of a given signal group and state. If using this VISSIM will automatically set ContrByCOM to true.
+        /// </summary>
+        /// <param name="signalGroup">ISignalGroup object</param>
+        /// <param name="state">Integer value representig signal state</param>
+        /// <returns>True if VISSIM accepted the change</returns>
+        public static bool SetSignalState(ISignalGroup signalGroup, int state)
+        {
+            try
+            {
+                signalGroup.set_AttValue("SigState", state);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while setting signal state!");
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Simulation.cs" />
+    <Compile Include="BLL\SubPhase.cs" />
     <Compile Include="DAL\COM.cs" />
     <Compile Include="DAL\VissimConnection.cs" />
     <Compile Include="UI\MainWindow.cs">
