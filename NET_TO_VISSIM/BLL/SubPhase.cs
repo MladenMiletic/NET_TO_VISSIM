@@ -94,6 +94,10 @@ namespace NET_TO_VISSIM.BLL
             this.Duration = defaultDuration;
         }
 
+        /// <summary>
+        /// Changes the duration
+        /// </summary>
+        /// <param name="newDuration">new duration</param>
         public void ChangeDuration(float newDuration)
         {
             if(editable)
