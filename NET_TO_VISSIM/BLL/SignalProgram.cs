@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VISSIMLIB;
 
 namespace NET_TO_VISSIM.BLL
 {
@@ -18,12 +19,13 @@ namespace NET_TO_VISSIM.BLL
         public int phaseCount;
         public int currentPhaseIndex;
         public Phase currentPhase;
+        public int signalControllerId;
 
         /// <summary>
         /// Constructor, if no offset is set it is considered to be 0
         /// </summary>
         /// <param name="phases">List of phases</param>
-        public SignalProgram(List<Phase> phases) : this(phases, 0)
+        public SignalProgram(List<Phase> phases, int signalControllerId) : this(phases, signalControllerId, 0)
         {
         }
 
@@ -32,8 +34,9 @@ namespace NET_TO_VISSIM.BLL
         /// </summary>
         /// <param name="phases">List of phases</param>
         /// <param name="offset">Offset</param>
-        public SignalProgram(List<Phase> phases, float offset)
+        public SignalProgram(List<Phase> phases, int signalControllerId, float offset)
         {
+            this.signalControllerId = signalControllerId;
             this.phases = phases;
             this.offset = offset;
             this.currentDuration = offset;
@@ -80,9 +83,10 @@ namespace NET_TO_VISSIM.BLL
         /// Performs one step, activates proper phase
         /// </summary>
         /// <param name="resolution">Simulation resolution</param>
-        public void Step(int resolution)
+        /// <param name="vissim">Vissim instance</param>
+        public void Step(int resolution, Vissim vissim)
         {
-            if (currentPhase.Step(resolution))
+            if (currentPhase.Step(resolution, signalControllerId, vissim))
             {
                 currentPhaseIndex++;
                 if (currentPhaseIndex == phaseCount)

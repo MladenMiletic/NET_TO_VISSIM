@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VISSIMLIB;
 
 namespace NET_TO_VISSIM.BLL
 {
@@ -78,10 +79,12 @@ namespace NET_TO_VISSIM.BLL
         /// Activates required subphase
         /// </summary>
         /// <param name="resolution">Simulation resolution</param>
+        /// <param name="vissim">Vissim instance</param>
+        /// <param name="signalControllerId">Id of the signal controller</param>
         /// <returns>True if phase is over, false if not</returns>
-        public bool Step(int resolution)
+        public bool Step(int resolution, int signalControllerId, Vissim vissim)
         {
-            if(currentSubPhase.Step(resolution))
+            if(currentSubPhase.Step(resolution, signalControllerId, vissim))
             {
                 currentSubPhaseIndex++;
                 if (currentSubPhaseIndex == subPhaseCount)
