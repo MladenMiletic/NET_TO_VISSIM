@@ -9,26 +9,27 @@ Project goals:
 
 # 1. Enable COM communication with PTV VISSIM (v10) software:
   - [x] Launch VISSIM from the application 
-  - Load a network to VISSIM [x]
-  - Manipulate basic simulation parameters [x]
-  - Run the simulation(s) [x]
+  - [x] Load a network to VISSIM
+  - [x] Manipulate basic simulation parameters
+  - [x] Run the simulation(s)
   
 # 2. Gather simulation data:
-  - Access all available simulation data after simulation [ ]
-  - Access all available simulation data during simulation [ ]
-  - Access all data across multiple simulations [ ]
-  - Store all gathered data in .csv format [ ]
+  - [ ] Access all available simulation data after simulation
+  - [ ] Access all available simulation data during simulation
+  - [ ] Access all data across multiple simulations
+  - [ ] Store all gathered data in .csv format
   
 # 3. Implement signal control:
-  - Read signal data from each signal controller and group [x]
-  - Take control of signal controller to repeat existing signal program [ ]
-  - Make permament and temporary changes to the signal program [ ]
+  - [x] Read signal data from each signal controller and group
+  - [ ] Take control of signal controller to repeat existing signal program
+  - [ ] Make permament and temporary changes to the signal program
   
 # 4. Implement artificial intelligence:
-  - Fuzzy Logic for signal control [ ]
-  - Genetic algorithm for the optimisation of signal programs [ ]
-  - Neural network for signal control [ ]
+  - [ ] Fuzzy Logic for signal control
+  - [ ] Genetic algorithm for the optimisation of signal programs
+  - [ ] Reinforcement learning algorithms
+  - [ ] Neural network for signal control
   
 # 5. Fluid user interface
-  - Use application while VISSIM simulation is running [ ]
-  - Dynamcally change simulation parameters [ ]
+  - [ ] Use application while VISSIM simulation is running
+  - [ ] Dynamcally change simulation parameters
