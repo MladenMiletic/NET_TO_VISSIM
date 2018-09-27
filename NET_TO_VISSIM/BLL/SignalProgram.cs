@@ -25,6 +25,7 @@ namespace NET_TO_VISSIM.BLL
         /// Constructor, if no offset is set it is considered to be 0
         /// </summary>
         /// <param name="phases">List of phases</param>
+        /// <param name="signalControllerId">If of the signal controller</param>
         public SignalProgram(List<Phase> phases, int signalControllerId) : this(phases, signalControllerId, 0)
         {
         }
@@ -34,6 +35,7 @@ namespace NET_TO_VISSIM.BLL
         /// </summary>
         /// <param name="phases">List of phases</param>
         /// <param name="offset">Offset</param>
+        /// <param name="signalControllerId">Id of the signal controller</param>
         public SignalProgram(List<Phase> phases, int signalControllerId, float offset)
         {
             this.signalControllerId = signalControllerId;
