@@ -1,4 +1,4 @@
-![alt text](Images/logo.png)
+![alt text](Images/LogoGitRepo.png)
 
 # NET_TO_VISSIM
 
