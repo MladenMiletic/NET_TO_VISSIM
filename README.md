@@ -1,4 +1,6 @@
+<p align="center"> 
 ![alt text](Images/LogoGitRepo.png)
+</p>
 
 The goal of this project is to create a stable application based in .NET framework that can connect by COM to PTV VISSIM software in order to take control of its simulation parameters and to enable the use of advanced traffic algorithms as well as the implementation of artificial intelligence.
 
