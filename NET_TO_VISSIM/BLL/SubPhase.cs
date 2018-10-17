@@ -19,7 +19,11 @@ namespace NET_TO_VISSIM.BLL
         public float CurrentDuration { get => currentDuration; set => currentDuration = value; }
         public float Duration { get => duration; private set => duration = value; }
         public bool Editable { get => editable; set => editable = value; }
+        public float MaxDuration { get => maxDuration; set => maxDuration = value; }
+        public float MinDuration { get => minDuration; set => minDuration = value; }
 
+        private float minDuration;
+        private float maxDuration;
         private bool editable;
         private List<int> signalGroupIds;
         private List<int> signalStates;
@@ -99,14 +103,58 @@ namespace NET_TO_VISSIM.BLL
         }
 
         /// <summary>
-        /// Changes the duration
+        /// Changes the duration of this subphase
         /// </summary>
         /// <param name="newDuration">new duration</param>
         public void ChangeDuration(float newDuration)
         {
             if(editable)
             {
-                this.duration = newDuration;
+                if(newDuration >= minDuration && newDuration <= maxDuration)
+                {
+                    this.duration = newDuration;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Increases the duration of this subphase by given amount, if this increase is above max duration the subphase duration will be set to max duration
+        /// </summary>
+        /// <param name="increase">Number of seconds by which the duration will be increased</param>
+        public void ChangeDurationIncrease(float increase)
+        {
+            if(editable)
+            {
+                float newDuration = this.duration + increase;
+                if (newDuration > maxDuration)
+                {
+                    ChangeDuration(maxDuration);
+                }
+                else
+                {
+                    ChangeDuration(newDuration);
+                }
+            }
+        }
+ 
+
+        /// <summary>
+        /// Decreases the duration of this subphase by given amount, if this decrease is below min duration the subphase duration will be set to min duration
+        /// </summary>
+        /// <param name="decrease">Number of seconds by which the duration will be decreased</param>
+        public void ChangeDurationDecrease(float decrease)
+        {
+            if (editable)
+            {
+                float newDuration = this.duration - decrease;
+                if (newDuration < minDuration)
+                {
+                    ChangeDuration(minDuration);
+                }
+                else
+                {
+                    ChangeDuration(newDuration);
+                }
             }
         }
     }
