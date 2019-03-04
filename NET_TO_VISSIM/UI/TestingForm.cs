@@ -14,7 +14,7 @@ using VISSIMLIB;
 
 namespace NET_TO_VISSIM.UI
 {
-    public partial class TestingForm : Form
+    public partial class TestingForm : System.Windows.Forms.Form
     {
         public VissimConnection vissim;
         public Simulation sim;
