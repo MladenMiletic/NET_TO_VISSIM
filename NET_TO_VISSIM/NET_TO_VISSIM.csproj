@@ -81,6 +81,7 @@
     <Compile Include="BLL\Phase.cs" />
     <Compile Include="BLL\SignalProgram.cs" />
     <Compile Include="BLL\Simulation.cs" />
+    <Compile Include="BLL\Neural\SOM.cs" />
     <Compile Include="BLL\SubPhase.cs" />
     <Compile Include="DAL\COM.cs" />
     <Compile Include="DAL\VissimConnection.cs" />

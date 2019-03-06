@@ -78,7 +78,7 @@ namespace NET_TO_VISSIM.BLL
                         var signalState = enumeratorSignalStates.Current;
                         ISignalController SignalController = vissim.Net.SignalControllers.get_ItemByKey(signalControllerId);
                         ISignalGroup SignalGroup = SignalController.SGs.get_ItemByKey(signalGroupId);
-                        DAL.COM.SetSignalState(SignalGroup, signalState);
+                        COM.SetSignalState(SignalGroup, signalState);
                     }
                 }
                 currentDuration = currentDuration + (1/resolution);
