@@ -69,19 +69,19 @@
     <Compile Include="BLL\SubPhase.cs" />
     <Compile Include="DAL\COM.cs" />
     <Compile Include="DAL\VissimConnection.cs" />
-    <Compile Include="UI\MainWindow.cs">
+    <Compile Include="PL\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\MainWindow.Designer.cs">
+    <Compile Include="PL\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Meta.cs" />
-    <Compile Include="UI\TestingForm.cs">
+    <Compile Include="PL\Meta.cs" />
+    <Compile Include="PL\TestingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\TestingForm.Designer.cs">
+    <Compile Include="PL\TestingForm.Designer.cs">
       <DependentUpon>TestingForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -93,10 +93,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UI\MainWindow.resx">
+    <EmbeddedResource Include="PL\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\TestingForm.resx">
+    <EmbeddedResource Include="PL\TestingForm.resx">
       <DependentUpon>TestingForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

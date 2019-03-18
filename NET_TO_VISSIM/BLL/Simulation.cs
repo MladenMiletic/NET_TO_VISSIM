@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VISSIMLIB;
 using NET_TO_VISSIM.DAL;
+using System.Windows.Forms;
 
 namespace NET_TO_VISSIM.BLL
 {
@@ -85,8 +86,24 @@ namespace NET_TO_VISSIM.BLL
         /// </summary>
         public void SimulationStep()
         {
-            currentSimulation.RunSingleStep();
-            // AlgorithmCheck();
+            try
+            {
+                currentSimulation.RunSingleStep();
+                AlgorithmCheck();
+                SetSignalStates();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Not implemented yet
+        /// </summary>
+        private void SetSignalStates()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
