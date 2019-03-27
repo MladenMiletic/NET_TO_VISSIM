@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\HelpMethods.cs" />
     <Compile Include="BLL\Phase.cs" />
     <Compile Include="BLL\SignalProgram.cs" />
     <Compile Include="BLL\Simulation.cs" />

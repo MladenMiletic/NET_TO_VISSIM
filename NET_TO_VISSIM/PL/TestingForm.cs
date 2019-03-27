@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using NET_TO_VISSIM.DAL;
 using NET_TO_VISSIM.BLL;
 using VISSIMLIB;
-
+using System.IO;
+using System.Globalization;
 
 namespace NET_TO_VISSIM.UI
 {
@@ -105,6 +106,21 @@ namespace NET_TO_VISSIM.UI
             }
             SignalProgram signalProgram = new SignalProgram(listPhases, sigController);
             MessageBox.Show("", "");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                double[][] importedData = BLL.HelpMethods.LoadTrainingSet(openFileDialog1.FileName, ',');
+                if (importedData != null)
+                {
+                    BLL.Neural.SOM som = new BLL.Neural.SOM(16, 4, 4, 0.1, 1, 8, 1);
+                    som.TrainSOM(importedData, 10);
+                    
+                }
+            }
         }
     }
 }
