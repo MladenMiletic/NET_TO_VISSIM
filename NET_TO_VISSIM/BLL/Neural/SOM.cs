@@ -78,7 +78,7 @@ namespace NET_TO_VISSIM.BLL.Neural
                 somLearningTrainer.LearningRate = driftingLearningRate * (numOfEpochs - currentEpoch) / numOfEpochs + fixedLearningRate;
                 somLearningTrainer.LearningRadius = (double)learningRadius * (numOfEpochs - currentEpoch) / numOfEpochs;
 
-                double[][] shuffledDataSet = Shuffle2DArray(inputDataSet);
+                double[][] shuffledDataSet = BLL.HelpMethods.Shuffle2DArray(inputDataSet);
 
                 double epochError = somLearningTrainer.RunEpoch(shuffledDataSet);
             }
@@ -101,28 +101,6 @@ namespace NET_TO_VISSIM.BLL.Neural
             return somNetwork.GetWinner();
         }
 
-#region Help methods
 
-        /// <summary>
-        /// Implementation of Knuth shuffle algorithm
-        /// </summary>
-        /// <param name="inputDataSet">Set to be shuffled</param>
-        /// <returns></returns>
-        private double[][] Shuffle2DArray(double[][] inputDataSet)
-        {
-            Random r = new Random();
-            int rInt = r.Next(0, 100);
-            for (int t = 0; t < inputDataSet.Length; t++)
-            {
-                double [] tmp = inputDataSet[t];
-                rInt = r.Next(t, inputDataSet.Length);
-      
-                inputDataSet[t] = inputDataSet[rInt];
-                inputDataSet[rInt] = tmp;
-            }
-            return inputDataSet;
-        }
-
-#endregion
     }
 }

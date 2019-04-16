@@ -46,5 +46,25 @@ namespace NET_TO_VISSIM.BLL
                 return null;
             }
         }
+
+        /// <summary>
+        /// Implementation of Knuth shuffle algorithm
+        /// </summary>
+        /// <param name="inputDataSet">Set to be shuffled</param>
+        /// <returns></returns>
+        public static double[][] Shuffle2DArray(double[][] inputDataSet)
+        {
+            Random r = new Random();
+            int rInt = r.Next(0, 100);
+            for (int t = 0; t < inputDataSet.Length; t++)
+            {
+                double[] tmp = inputDataSet[t];
+                rInt = r.Next(t, inputDataSet.Length);
+
+                inputDataSet[t] = inputDataSet[rInt];
+                inputDataSet[rInt] = tmp;
+            }
+            return inputDataSet;
+        }
     }
 }
