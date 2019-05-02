@@ -101,6 +101,20 @@ namespace NET_TO_VISSIM.BLL.Neural
             return somNetwork.GetWinner();
         }
 
+        public void PerformAnalysis()
+        {
+            foreach (Neuron neuron in this.somNetwork.Layers[0].Neurons)
+            {
+                double sum = 0;
+                foreach(double weight in neuron.Weights)
+                {
+                    sum = sum + Math.Pow(weight, 2);
+                }
+                double distance = Math.Sqrt(sum);
+                MessageBox.Show("Neuron distance from origin: " + distance);
+            }
+        }
+
 
     }
 }

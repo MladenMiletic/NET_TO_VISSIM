@@ -110,16 +110,18 @@ namespace NET_TO_VISSIM.UI
 
         private void button8_Click(object sender, EventArgs e)
         {
+            BLL.Neural.SOM som;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 double[][] importedData = BLL.HelpMethods.LoadTrainingSet(openFileDialog1.FileName, ',');
                 if (importedData != null)
                 {
-                    BLL.Neural.SOM som = new BLL.Neural.SOM(16, 4, 4, 0.1, 1, 8, 1);
-                    som.TrainSOM(importedData, 10);
-                    
+                    som = new BLL.Neural.SOM(25, 5, 5, 0.5, 1, 8, 170);
+                    som.TrainSOM(importedData, 1000);
+                    som.PerformAnalysis();
                 }
+                
             }
         }
     }
