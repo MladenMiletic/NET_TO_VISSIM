@@ -10,7 +10,7 @@ namespace NET_TO_VISSIM.BLL
     /// <summary>
     /// Contains signal program for one intersection
     /// </summary>
-    class SignalProgram
+    public class SignalProgram
     {
         public List<Phase> phases;
         public float duration;
@@ -39,7 +39,7 @@ namespace NET_TO_VISSIM.BLL
         public SignalProgram(List<Phase> phases, int signalControllerId, float offset)
         {
             this.signalControllerId = signalControllerId;
-            this.phases = phases;
+            this.phases = phases.ToList();
             this.offset = offset;
             this.currentDuration = offset;
             phaseCount = phases.Count();
@@ -56,10 +56,11 @@ namespace NET_TO_VISSIM.BLL
             currentPhaseIndex = 0;
             foreach (Phase phase in phases)
             {
-                if (checkedPhasesDuration + phase.duration > offset)
+                if (checkedPhasesDuration + phase.duration >= offset)
                 {
                     this.currentPhase = phase;
                     phase.currentDuration = offset - checkedPhasesDuration;
+                    break;
                 }
                 else
                 {

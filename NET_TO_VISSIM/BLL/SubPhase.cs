@@ -11,7 +11,7 @@ namespace NET_TO_VISSIM.BLL
     /// <summary>
     /// Base Class used to store subphase data, subphase is in this context defined as a set of signal states for various signal groups
     /// </summary>
-    class SubPhase
+    public class SubPhase
     {
         public float DefaultDuration { get => defaultDuration; set => defaultDuration = value; }
         public List<int> SignalGroupIds { get => signalGroupIds; set => signalGroupIds = value; }
@@ -41,8 +41,8 @@ namespace NET_TO_VISSIM.BLL
         /// <param name="editable">Set true if duration of this subphase can be changed</param>
         public SubPhase(List<int> signalGroupIds, List<int> signalStates, float duration, bool editable)
         {
-            this.signalGroupIds = signalGroupIds;
-            this.signalStates = signalStates;
+            this.signalGroupIds = signalGroupIds.ToList();
+            this.signalStates = signalStates.ToList();
             this.duration = duration;
             this.currentDuration = 0;
             this.defaultDuration = duration;
@@ -81,8 +81,9 @@ namespace NET_TO_VISSIM.BLL
                         COM.SetSignalState(SignalGroup, signalState);
                     }
                 }
-                currentDuration = currentDuration + (1/resolution);
+                
             }
+            currentDuration = currentDuration + (1 / resolution);
             if (currentDuration >= duration)
             {
                 currentDuration = 0;

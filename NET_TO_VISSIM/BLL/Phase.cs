@@ -10,7 +10,7 @@ namespace NET_TO_VISSIM.BLL
     /// <summary>
     /// Contains the list of all subphases
     /// </summary>
-    class Phase
+    public class Phase
     {
         public List<SubPhase> subPhases;
         public float duration;
@@ -34,7 +34,7 @@ namespace NET_TO_VISSIM.BLL
         /// <param name="currentDuration">Current duration of the phase</param>
         public Phase(List<SubPhase> subPhases, float currentDuration)
         {
-            this.subPhases = subPhases;
+            this.subPhases = subPhases.ToList();
             this.currentDuration = currentDuration;
             subPhaseCount = subPhases.Count();
             CalculateDuration();
@@ -62,10 +62,11 @@ namespace NET_TO_VISSIM.BLL
             currentSubPhaseIndex = 0;
             foreach (SubPhase subPhase in subPhases)
             {
-                if (checkedPhasesDuration + subPhase.Duration > currentDuration)
+                if (checkedPhasesDuration + subPhase.Duration >= currentDuration)
                 {
                     this.currentSubPhase = subPhase;
                     subPhase.CurrentDuration = currentDuration - checkedPhasesDuration;
+                    break;
                 }
                 else
                 {

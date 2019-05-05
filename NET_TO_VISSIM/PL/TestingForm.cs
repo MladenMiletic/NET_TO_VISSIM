@@ -19,6 +19,7 @@ namespace NET_TO_VISSIM.UI
     {
         public VissimConnection vissim;
         public Simulation sim;
+        public SignalProgram signalProgram;
 
         public TestingForm()
         {
@@ -34,11 +35,12 @@ namespace NET_TO_VISSIM.UI
         private void button2_Click(object sender, EventArgs e)
         {
             sim = new Simulation(vissim);
+            sim.SetSimulationResolution(1);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            sim.SimulationStep();
+            //sim.SimulationStep();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -69,6 +71,7 @@ namespace NET_TO_VISSIM.UI
             int controllercount = vis.Net.SignalControllers.Count;
             foreach (ISignalController controller in vis.Net.SignalControllers)
             {
+                
                 int numSGS = controller.SGs.Count;
                 MessageBox.Show("" + numSGS, "OP OP");
                 foreach (ISignalGroup signalGroup in controller.SGs)
@@ -123,6 +126,120 @@ namespace NET_TO_VISSIM.UI
                 }
                 
             }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int sigController = 3;
+            List<Phase> listPhases = new List<Phase>();
+            
+            //PHASE 1
+            List<SubPhase> listSubPhases = new List<SubPhase>();
+            //SUB 1
+            //how many SGs?
+            List<int> listSGids = new List<int>();
+            List<int> listStates = new List<int>();
+            int numSGS = 11;
+            for (int k = 0; k < numSGS; k++)
+            {
+                listSGids.Add(k + 1);
+            }
+            listStates.AddRange(new int[] { 3, 3, 1, 1, 1, 1, 1, 1, 1, 3, 3});
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 22, true));
+
+            //SUB 2
+            listStates.Clear();
+            listStates.AddRange(new int[] { 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 3, false));
+
+            //SUB 3
+            listStates.Clear();
+            listStates.AddRange(new int[] { 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 3, false));
+
+            //SUB 4
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 2, false));
+
+            listPhases.Add(new Phase(listSubPhases));
+            listSubPhases.Clear();
+
+            //PHASE 2
+            //SUB 1
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 3, 3, 1, 2, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 2, false));
+
+            //SUB 2
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 3, 3, 1, 3, 1, 1, 3, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 18, true));
+
+            //SUB 3
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 4, 4, 1, 3, 1, 1, 3, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 3, false));
+
+            //SUB 4
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 2, 3, 1, 2, 3, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 2, false));
+
+            listPhases.Add(new Phase(listSubPhases));
+            listSubPhases.Clear();
+
+            //PHASE 3
+            //SUB 1
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 3, 4, 1, 3, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 3, false));
+
+            //SUB 2
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 13, true));
+
+            //SUB 3
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 3, 1, 1, 4, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 3, false));
+
+            //SUB 4
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 1, false));
+
+            //SUB 5
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 3, 1, 3, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 8, true));
+
+            //SUB 6
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 3, false));
+
+            //SUB 7
+            listStates.Clear();
+            listStates.AddRange(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 2, false));
+
+            //SUB 8
+            listStates.Clear();
+            listStates.AddRange(new int[] { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
+            listSubPhases.Add(new SubPhase(listSGids, listStates, 2, false));
+
+            listPhases.Add(new Phase(listSubPhases));
+            listSubPhases.Clear();
+
+            signalProgram = new SignalProgram(listPhases, sigController);
+            MessageBox.Show("", "");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            sim.SimulationStep(signalProgram);
         }
     }
 }

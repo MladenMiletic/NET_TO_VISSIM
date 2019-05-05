@@ -39,11 +39,17 @@ namespace NET_TO_VISSIM.BLL
         /// </summary>
         private int simulationResolution;
 
+        private VissimConnection vissimConnection;
+
         /// <summary>
         /// Default constructor which gets the simulation object reference from VISSIM
         /// </summary>
         /// <param name="vissimConnection">Vissim connection from <see cref="VissimConnection"/></param>
-        public Simulation(VissimConnection vissimConnection) => currentSimulation = vissimConnection.GetVissimInstance().Simulation;
+        public Simulation(VissimConnection vissimConnection)
+        {
+            currentSimulation = vissimConnection.GetVissimInstance().Simulation;
+            this.vissimConnection = vissimConnection;
+        }
 
         /// <summary>
         /// Sets simulation seed in VISSIM and stores it locally if successful
@@ -84,13 +90,13 @@ namespace NET_TO_VISSIM.BLL
         /// <summary>
         /// Performs one sigle simulation step, and checks possible algorithms and implemenations
         /// </summary>
-        public void SimulationStep()
+        public void SimulationStep(SignalProgram signalProgram)
         {
             try
             {
                 currentSimulation.RunSingleStep();
-                AlgorithmCheck();
-                SetSignalStates();
+                //AlgorithmCheck();
+                signalProgram.Step(this.simulationResolution, vissimConnection.GetVissimInstance());
             }
             catch (Exception ex)
             {
@@ -98,13 +104,7 @@ namespace NET_TO_VISSIM.BLL
             }
         }
 
-        /// <summary>
-        /// Not implemented yet
-        /// </summary>
-        private void SetSignalStates()
-        {
-            throw new NotImplementedException();
-        }
+
 
         /// <summary>
         /// Not implemented yet
