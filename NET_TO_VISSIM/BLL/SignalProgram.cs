@@ -102,5 +102,19 @@ namespace NET_TO_VISSIM.BLL
             }
             currentDuration += 1 / resolution;
         }
+
+        /// <summary>
+        /// Resets the signal program to original state, changes all subphases to default durations
+        /// </summary>
+        public void ResetProgram()
+        {
+            foreach (Phase phase in phases)
+            {
+                foreach (SubPhase subPhase in phase.subPhases)
+                {
+                    subPhase.ResetDuration();
+                }
+            }
+        }
     }
 }

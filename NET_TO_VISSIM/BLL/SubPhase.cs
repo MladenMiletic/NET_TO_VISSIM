@@ -111,10 +111,7 @@ namespace NET_TO_VISSIM.BLL
         {
             if(editable)
             {
-                if(newDuration >= minDuration && newDuration <= maxDuration)
-                {
-                    this.duration = newDuration;
-                }
+                this.duration = newDuration;
             }
         }
 
