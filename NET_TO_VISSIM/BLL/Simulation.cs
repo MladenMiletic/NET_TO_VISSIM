@@ -41,6 +41,8 @@ namespace NET_TO_VISSIM.BLL
 
         private VissimConnection vissimConnection;
 
+        public double[] queueCounterResultsMax;
+
         /// <summary>
         /// Default constructor which gets the simulation object reference from VISSIM
         /// </summary>
@@ -95,7 +97,7 @@ namespace NET_TO_VISSIM.BLL
             try
             {
                 currentSimulation.RunSingleStep();
-                //AlgorithmCheck();
+                SensorCheck();
                 signalProgram.Step(this.simulationResolution, vissimConnection.GetVissimInstance());
             }
             catch (Exception ex)
@@ -112,6 +114,23 @@ namespace NET_TO_VISSIM.BLL
         private void AlgorithmCheck()
         {
             throw new NotImplementedException();
+        }
+
+        private void SensorCheck()
+        {
+            ReadQCounters();
+        }
+
+        private void ReadQCounters()
+        {
+            int numOfCounters = vissimConnection.GetVissimInstance().Net.QueueCounters.Count;
+            queueCounterResultsMax = new double[numOfCounters];
+            int i = 0;
+            foreach (IQueueCounter queueCounter in vissimConnection.GetVissimInstance().Net.QueueCounters)
+            {
+                queueCounterResultsMax[i] = queueCounter.get_AttValue("QLenMax(Current, Current)");
+                i++;
+            }
         }
 
         /// <summary>
