@@ -8,7 +8,7 @@ Project is created as a tool used in the master thesis of Mladen Miletić, Facul
 
 Project goals:
 
-# 1. Enable COM communication with PTV VISSIM (v10) software:
+# 1. Enable COM communication with PTV VISSIM (v11) software:
   - [x] Launch VISSIM from the application 
   - [x] Load a network to VISSIM
   - [x] Manipulate basic simulation parameters
