@@ -12,6 +12,8 @@ using NET_TO_VISSIM.BLL;
 using VISSIMLIB;
 using System.IO;
 using System.Globalization;
+using AForge.Neuro;
+using AForge.MachineLearning;
 
 namespace NET_TO_VISSIM.UI
 {
@@ -239,7 +241,119 @@ namespace NET_TO_VISSIM.UI
 
         private void button10_Click(object sender, EventArgs e)
         {
-            sim.SimulationStep(signalProgram);
+            sim.RunStepByStep(signalProgram);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            sim.RunMultipleStepByStep(signalProgram, 10);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            double simulationPeriod = COM.getSimulationPeriod(sim.currentSimulation);
+            for (int i = 300; i < simulationPeriod; i = i + 300)
+            {
+                sim.RunContinuos(i);
+                if (i % 600 == 0)
+                {
+                    ISignalController SignalController = vissim.GetVissimInstance().Net.SignalControllers.get_ItemByKey(3);
+                    SignalController.set_AttValue("ProgNo", 1);
+                }
+                else
+                {
+                    vissim.GetVissimInstance().Net.SignalControllers.get_ItemByKey(3).set_AttValue("ProgNo", 2);
+                }
+            }
+            
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            vissim = new VissimConnection();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                COM.LoadVissimNetwork(vissim.GetVissimInstance(), openFileDialog1.FileName);
+            }
+            sim = new Simulation(vissim);
+            sim.SetSimulationResolution(1);
+
+
+            BLL.Neural.SOM som = new BLL.Neural.SOM(25, 5, 5, 0.5, 1, 18, 100);
+            OpenFileDialog openFileDialog2 = new OpenFileDialog();
+            if (openFileDialog2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                double[][] importedData = BLL.HelpMethods.LoadTrainingSet(openFileDialog2.FileName, ',');
+                if (importedData != null)
+                {
+                    
+                    som.TrainSOM(importedData, 1000);
+                }
+
+            }
+            EpsilonGreedyExploration greedyExploration = new EpsilonGreedyExploration(1);
+            double beta = 0;
+            BLL.Neural.Q q = new BLL.Neural.Q(25, 7, greedyExploration);
+            q.qLearning.DiscountFactor = 0.1;
+            
+            BLL.Thesis.Actions actions = new BLL.Thesis.Actions(25,22);
+
+            double simulationPeriod = COM.getSimulationPeriod(sim.currentSimulation);
+            ISignalController SignalController = vissim.GetVissimInstance().Net.SignalControllers.get_ItemByKey(3);
+            StreamWriter writer = new StreamWriter("Results1000.csv");
+            for (int j = 0; j < 1000; j++)
+            {
+                sim.RunContinuos(299);
+                for (int i = 599; i <= simulationPeriod -1; i = i + 300)
+                {
+
+                    double[] qLenMax = sim.queueCounterResultsMax;
+                    double[] qLenAvg = sim.queueCounterResultsAvg;
+                    double[] qLenAll = new double[18];
+
+                    Array.Copy(qLenAvg, qLenAll, qLenAvg.Length);
+                    Array.Copy(qLenMax, 0, qLenAll, qLenAvg.Length, qLenMax.Length);
+                    
+
+                    double delayAvgBefore = vissim.GetVissimInstance().Net.VehicleNetworkPerformanceMeasurement.get_AttValue("DelayAvg(Current, Current, All)");
+
+                    int state1 = som.GetWinningNeuronNumber(qLenAll);
+
+                    int action = q.GetAction(state1);
+                    
+                    actions.PerformAction(state1, action, SignalController);
+
+                    sim.RunContinuos(i);
+
+                    qLenMax = sim.queueCounterResultsMax;
+                    qLenAvg = sim.queueCounterResultsAvg;
+                    Array.Copy(qLenAvg, qLenAll, qLenAvg.Length);
+                    Array.Copy(qLenMax, 0, qLenAll, qLenAvg.Length, qLenMax.Length);
+
+                    int state2 = som.GetWinningNeuronNumber(qLenAll);
+
+                    double delayAvgAfter= vissim.GetVissimInstance().Net.VehicleNetworkPerformanceMeasurement.get_AttValue("DelayAvg(Current, Current, All)");
+
+                    double reward = BLL.Neural.Q.CalculateReward(qLenAvg, delayAvgBefore, delayAvgAfter, beta);
+
+                    q.UpdateQTable(state1, action, reward, state2);
+                }
+                
+                double resultTTS = vissim.GetVissimInstance().Net.VehicleNetworkPerformanceMeasurement.get_AttValue("TravTmTot(Current, Total, All)");
+              //  int seed = sim.currentSimulation.get_AttValue("RandSeed");
+                writer.WriteLine(j + "," + resultTTS);
+                q.qLearning.ExplorationPolicy = new EpsilonGreedyExploration((Math.Pow(0.995, (j+1)) * 0.99) + 0.01);
+               // beta = (j + 1) * 0.001;
+                writer.Flush();
+                sim.currentSimulation.RunSingleStep();
+
+            }
+            
+            writer.Close();
+
+
+            
         }
     }
 }

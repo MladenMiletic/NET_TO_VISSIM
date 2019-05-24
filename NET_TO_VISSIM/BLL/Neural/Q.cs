@@ -24,9 +24,9 @@ namespace NET_TO_VISSIM.BLL.Neural
         /// <param name="states">number of states</param>
         /// <param name="actions">number of actions</param>
         /// <param name="explorationRate">exploration rate in epsilon greedy exploration</param>
-        public Q(int states, int actions, double explorationRate)
+        public Q(int states, int actions, EpsilonGreedyExploration exploration)
         {
-            qLearning = new QLearning(states, actions, new EpsilonGreedyExploration(explorationRate), false);
+            qLearning = new QLearning(states, actions, exploration, false);
         }
 
         /// <summary>
@@ -51,6 +51,9 @@ namespace NET_TO_VISSIM.BLL.Neural
             qLearning.UpdateState(previousState, action, reward, nextState);
         }
 
-        
+        internal static double CalculateReward(double[] qLenAvg, double delayAvgBefore, double delayAvgAfter, double beta)
+        {
+            return delayAvgBefore - delayAvgAfter;
+        }
     }
 }

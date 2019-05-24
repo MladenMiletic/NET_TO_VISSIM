@@ -111,6 +111,23 @@ namespace NET_TO_VISSIM.DAL
         }
 
         /// <summary>
+        /// Gets the simulation period from Vissim simulation
+        /// </summary>
+        /// <param name="simulation">Vissim.Simulation object</param>
+        /// <returns></returns>
+        public static int getSimulationPeriod(ISimulation simulation)
+        {
+            try
+            {
+                return simulation.get_AttValue("SimPeriod");
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Sets a breaking point used for continuos run
         /// </summary>
         /// <param name="simulation">Vissim.Simulation object</param>
@@ -149,6 +166,8 @@ namespace NET_TO_VISSIM.DAL
                 return false;
             }
         }
+
+
         #endregion
 
         #region SignalControl

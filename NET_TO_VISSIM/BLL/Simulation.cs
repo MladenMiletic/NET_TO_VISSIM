@@ -22,7 +22,7 @@ namespace NET_TO_VISSIM.BLL
         /// <summary>
         /// Holds the reference to the simulation interface of VISSIM
         /// </summary>
-        private ISimulation currentSimulation;
+        public ISimulation currentSimulation;
 
         /// <summary>
         /// Current simulation seed
@@ -41,7 +41,11 @@ namespace NET_TO_VISSIM.BLL
 
         private VissimConnection vissimConnection;
 
+        private double simulationTime;
+
         public double[] queueCounterResultsMax;
+
+        public double[] queueCounterResultsAvg;
 
         /// <summary>
         /// Default constructor which gets the simulation object reference from VISSIM
@@ -51,6 +55,10 @@ namespace NET_TO_VISSIM.BLL
         {
             currentSimulation = vissimConnection.GetVissimInstance().Simulation;
             this.vissimConnection = vissimConnection;
+            vissimConnection.GetVissimInstance().SuspendUpdateGUI();
+            int numOfCounters = vissimConnection.GetVissimInstance().Net.QueueCounters.Count;
+            queueCounterResultsMax = new double[numOfCounters];
+            queueCounterResultsAvg = new double[numOfCounters];
         }
 
         /// <summary>
@@ -118,17 +126,20 @@ namespace NET_TO_VISSIM.BLL
 
         private void SensorCheck()
         {
-            ReadQCounters();
+            if ((simulationTime + 2) % 300 == 0)
+            {
+                ReadQCounters();
+            }
+
         }
 
         private void ReadQCounters()
         {
-            int numOfCounters = vissimConnection.GetVissimInstance().Net.QueueCounters.Count;
-            queueCounterResultsMax = new double[numOfCounters];
             int i = 0;
             foreach (IQueueCounter queueCounter in vissimConnection.GetVissimInstance().Net.QueueCounters)
             {
                 queueCounterResultsMax[i] = queueCounter.get_AttValue("QLenMax(Current, Current)");
+                queueCounterResultsAvg[i] = queueCounter.get_AttValue("QLen(Current, Current)");
                 i++;
             }
         }
@@ -139,6 +150,7 @@ namespace NET_TO_VISSIM.BLL
         public void RunContinuos()
         {
             currentSimulation.RunContinuous();
+            ReadQCounters();
         }
 
         /// <summary>
@@ -151,6 +163,31 @@ namespace NET_TO_VISSIM.BLL
             {
                 RunContinuos();
             }
+        }
+
+        /// <summary>
+        /// Runs entire simulation step by step
+        /// </summary>
+        /// <param name="signalProgram">Current signal program</param>
+        public void RunStepByStep(SignalProgram signalProgram)
+        {
+            simulationPeriod = COM.getSimulationPeriod(currentSimulation);
+            simulationTime = 0;
+            for (int i = 0; i < (simulationPeriod * simulationResolution); i++)
+            {
+                SimulationStep(signalProgram);
+                simulationTime = simulationTime + (1 / simulationResolution);
+            }
+            //GET SIMULATION RESULTS HERE
+        }
+
+        public void RunMultipleStepByStep(SignalProgram signalProgram, int numberOfSimulations)
+        {
+            for (int i = 0; i < numberOfSimulations; i++)
+            {
+                RunStepByStep(signalProgram);
+            }
+            //
         }
 
         #region Dispose

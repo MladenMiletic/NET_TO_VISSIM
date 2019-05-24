@@ -115,6 +115,19 @@ namespace NET_TO_VISSIM.BLL.Neural
             }
         }
 
+        private double DistanceFromZero(Neuron neuron)
+        {
+            double sum = 0;
+
+            foreach(double weight in neuron.Weights)
+            {
+                sum = sum + Math.Pow(weight, 2);
+            }
+
+            return Math.Sqrt(sum);
+        }
+
+
 
     }
 }
